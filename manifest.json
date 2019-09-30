@@ -1,0 +1,25 @@
+{
+  "name": "Locus Dashboard",
+  "description": "Automatically login, display, and maintain ops dashboards.  Cloudwatch in particular.",
+  "version": "1.0",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["js/main.js"]
+    }
+  },
+  "icons": {
+    "16": "icon/locus-16.png",
+    "128": "icon/locus-128.png",
+    "256": "icon/locus-256.png"
+  },
+  "permissions": [
+    "power",
+    "storage",
+    "webview"
+  ],
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "kiosk_enabled" : true
+}

@@ -1,0 +1,39 @@
+/*
+ * Copyright (c) 2019 Rusty Burchfield
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT License.  See the LICENSE file for details.
+ */
+
+* {box-sizing: border-box;}
+
+body {
+  display: grid;
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+form {
+  align-self: center;
+  justify-self: center;
+
+  border: 2px solid #2ca58d;
+  border-radius: 5px;
+  background-color: #fffdf7;
+  padding: 1em;
+  color: #0a2342;
+}
+
+label {
+  display: block;
+}
+
+input {
+  display: block;
+  width: 100%;
+  outline-color: #f46197;
+}

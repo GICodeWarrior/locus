@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "cloudwatchURL": {
+      "title": "Amazon CloudWatch URL",
+      "description": "Full URL for the CloudWatch dashboard to display.  Include the refresh period and other settings as desired.",
+      "type": "string"
+    },
+    "account": {
+      "title": "AWS Account ID or Alias",
+      "type": "string"
+    },
+    "username": {
+      "title": "AWS IAM User Name",
+      "type": "string"
+    },
+    "password": {
+      "title": "AWS IAM User Password",
+      "type": "string"
+    }
+  }
+}
