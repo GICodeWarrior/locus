@@ -28,11 +28,16 @@ form {
   color: #0a2342;
 }
 
-label {
+label, fieldset {
   display: block;
+  margin-bottom: 0.5em;
 }
 
-input {
+label:last-child, fieldset:last-child {
+  margin-bottom: 0;
+}
+
+input, select {
   display: block;
   width: 100%;
   outline-color: #f46197;

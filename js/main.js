@@ -4,6 +4,7 @@
  * This software may be modified and distributed under the terms
  * of the MIT License.  See the LICENSE file for details.
  */
+'use strict';
 
 chrome.app.runtime.onLaunched.addListener(function(launchData) {
   var isKiosk = !!launchData.isKioskSession;

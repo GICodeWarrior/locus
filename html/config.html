@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!--
+
+<head>
+  <!--
       Copyright (c) 2019 Rusty Burchfield
 
       This software may be modified and distributed under the terms
       of the MIT License.  See the LICENSE file for details.
     -->
-    <link rel="stylesheet" href="../css/config.css" />
-    <script src="../js/config.js"></script>
-  </head>
-  <body>
-    <form>
-      <h2>Locus Configuration (local)</h2>
+  <link rel="stylesheet" href="../css/config.css" />
+  <script src="../js/config.js"></script>
+</head>
+
+<body>
+  <form>
+    <h2>Locus Configuration (local)</h2>
+    <label>Dashboard Type<select name="dashboardType" />
+      <option value="okta">Okta</option>
+      <option value="cloudwatch">CloudWatch</option>
+      </select>
+    </label>
+    <fieldset id="okta-fields">
+      <legend>Okta Settings</legend>
+      <label>Okta User Name<input name="oktaUsername" /></label>
+      <label>Okta Password<input name="oktaPassword" type="password" /></label>
+      <label>Okta Domain<input name="oktaDomain" /></label>
+      <label>Okta Application Path<input name="oktaAppPath" /></label>
+      <label>Application Logged Out Regex<input name="appLoggedOutRegex" /></label>
+      <label>Application Destination URL<input name="appDestinationURL" /></label>
+    </fieldset>
+    <fieldset id="cloudwatch-fields">
+      <legend>CloudWatch Settings</legend>
       <label>Amazon CloudWatch URL<input name="cloudwatchURL" /></label>
       <label>AWS Account ID or Alias<input name="account" /></label>
       <label>AWS IAM User Name<input name="username" /></label>
       <label>AWS IAM User Password<input name="password" type="password" /></label>
-  </body>
+    </fieldset>
+</body>
+
 </html>

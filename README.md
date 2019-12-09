@@ -1,6 +1,6 @@
 Locus is a ChromeOS kiosk app for displaying dashboards.
 
-Currently it only works with Amazon CloudWatch dashboards.
+Currently it works with Amazon CloudWatch dashboards and certain Okta SSO applications.
 
 ## Installation
 

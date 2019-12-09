@@ -1,22 +1,60 @@
 {
   "type": "object",
   "properties": {
-    "cloudwatchURL": {
-      "title": "Amazon CloudWatch URL",
-      "description": "Full URL for the CloudWatch dashboard to display.  Include the refresh period and other settings as desired.",
+    "dashboardType": {
+      "title": "Dashboard Type",
       "type": "string"
     },
-    "account": {
-      "title": "AWS Account ID or Alias",
-      "type": "string"
+    "okta": {
+      "type": "object",
+      "properties": {
+        "oktaUsername": {
+          "title": "Okta User Name",
+          "type": "string"
+        },
+        "oktaPassword": {
+          "title": "Okta Password",
+          "type": "string"
+        },
+        "oktaDomain": {
+          "title": "Okta Domain",
+          "type": "string"
+        },
+        "oktaAppPath": {
+          "title": "Okta Application Path",
+          "type": "string"
+        },
+        "appDestinationURL": {
+          "title": "Application Destination URL",
+          "type": "string"
+        },
+        "appLoggedOutRegex": {
+          "title": "Application Logged Out Regex",
+          "type": "string"
+        }
+      }
     },
-    "username": {
-      "title": "AWS IAM User Name",
-      "type": "string"
-    },
-    "password": {
-      "title": "AWS IAM User Password",
-      "type": "string"
+    "cloudwatch": {
+      "type": "object",
+      "properties": {
+        "cloudwatchURL": {
+          "title": "Amazon CloudWatch URL",
+          "description": "Full URL for the CloudWatch dashboard to display.  Include the refresh period and other settings as desired.",
+          "type": "string"
+        },
+        "account": {
+          "title": "AWS Account ID or Alias",
+          "type": "string"
+        },
+        "username": {
+          "title": "AWS IAM User Name",
+          "type": "string"
+        },
+        "password": {
+          "title": "AWS IAM User Password",
+          "type": "string"
+        }
+      }
     }
   }
 }

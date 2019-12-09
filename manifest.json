@@ -5,7 +5,9 @@
   "manifest_version": 2,
   "app": {
     "background": {
-      "scripts": ["js/main.js"]
+      "scripts": [
+        "js/main.js"
+      ]
     }
   },
   "icons": {
@@ -16,10 +18,12 @@
   "permissions": [
     "power",
     "storage",
-    "webview"
+    "webview",
+    "https://*.okta.com/*",
+    "https://*.oktapreview.com/*"
   ],
   "storage": {
     "managed_schema": "schema.json"
   },
-  "kiosk_enabled" : true
+  "kiosk_enabled": true
 }
