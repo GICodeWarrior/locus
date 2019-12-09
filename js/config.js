@@ -16,16 +16,20 @@ onload = function() {
   chrome.storage.local.get(null, function(items) {
     console.log('loading settings', items);
 
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+    });
+
     var select = document.querySelector('select');
     if (items[select.name]) {
       select.value = items[select.name];
       console.log('select - loaded from storage', select.name);
     }
     select.addEventListener('change', function() {
-      var setting = { [select.name]: select.value };
-      chrome.storage.local.set(setting);
+      items[select.name] = select.value;
+      chrome.storage.local.set(items);
       updateView(select.value);
-      console.log('select - saved to storage', setting);
+      console.log('select - saved to storage', items);
     });
     updateView(select.value);
 
@@ -45,6 +49,29 @@ onload = function() {
         chrome.storage.local.set(setting);
         console.log('input - saved to storage', setting);
       });
+    });
+
+    document.querySelector('button').addEventListener('click', function() {
+      var status = document.querySelector('div#export-status');
+      status.classList.value = '';
+      void status.offsetWidth;  // trigger reflow to reset animation
+
+      var dashboardType = items['dashboardType'] || 'none';
+      var toExport = {
+        dashboardType: {
+          'Value': dashboardType,
+        },
+        [dashboardType]: {
+          'Value': items[dashboardType] || {}
+        }
+      };
+
+      navigator.clipboard.writeText(JSON.stringify(toExport, null, 2))
+        .then(function() {
+          status.classList.add('success');
+        }).catch(function() {
+          status.classList.add('failure');
+        });
     });
   });
 };

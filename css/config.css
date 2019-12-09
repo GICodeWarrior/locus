@@ -42,3 +42,32 @@ input, select {
   width: 100%;
   outline-color: #f46197;
 }
+
+div#export-status {
+  display: inline;
+  font-weight: bold;
+}
+
+div#export-status.success::after {
+  color: #2ca58d;
+  content: '\2714';
+}
+
+div#export-status.failure::after {
+  color: #f46197;
+  content: 'X';
+}
+
+div#export-status.success, div#export-status.failure {
+  animation: fade 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0;
+  }
+}

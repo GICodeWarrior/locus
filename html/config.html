@@ -16,6 +16,7 @@
   <form>
     <h2>Locus Configuration (local)</h2>
     <label>Dashboard Type<select name="dashboardType" />
+      <option disabled selected value>Select Dashboard Type</option>
       <option value="okta">Okta</option>
       <option value="cloudwatch">CloudWatch</option>
       </select>
@@ -26,8 +27,8 @@
       <label>Okta Password<input name="oktaPassword" type="password" /></label>
       <label>Okta Domain<input name="oktaDomain" /></label>
       <label>Okta Application Path<input name="oktaAppPath" /></label>
-      <label>Application Logged Out Regex<input name="appLoggedOutRegex" /></label>
       <label>Application Destination URL<input name="appDestinationURL" /></label>
+      <label>Application Logged Out Regex<input name="appLoggedOutRegex" /></label>
     </fieldset>
     <fieldset id="cloudwatch-fields">
       <legend>CloudWatch Settings</legend>
@@ -36,6 +37,8 @@
       <label>AWS IAM User Name<input name="username" /></label>
       <label>AWS IAM User Password<input name="password" type="password" /></label>
     </fieldset>
+    <button>Export JSON to Clipboard</button>
+    <div id="export-status"></div>
 </body>
 
 </html>
