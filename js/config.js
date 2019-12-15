@@ -35,7 +35,7 @@ onload = function() {
 
     document.querySelectorAll('form > label > input').forEach(function(input) {
       if (items[input.name]) {
-        if (input.type == 'checkbox'){
+        if (input.type == 'checkbox') {
           input.checked = items[input.name]
         } else {
           input.value = items[input.name]
@@ -43,7 +43,7 @@ onload = function() {
         console.log('input - loaded from storage', input.name);
       }
       input.addEventListener('change', function() {
-        var setting = { [input.name]: input.value};
+        var setting = { [input.name]: input.value };
         if (input.type == 'checkbox') {
           setting[input.name] = input.checked;
         }

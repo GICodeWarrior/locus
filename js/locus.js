@@ -102,6 +102,7 @@ function updateConfig(storage, callback) {
     Object.freeze(config);
 
     console.log('updateconfig - configuration success');
+    prepareForcedReload(true);
     callback(true);
   });
 }
@@ -120,6 +121,30 @@ function validatePage() {
   }
 
   config.Dashboard.validatePage.call(undefined, getWebview(), config);
+  prepareForcedReload();
+}
+
+var activeReloadTimer;
+function prepareForcedReload(forceResetTimer) {
+  if (forceResetTimer && activeReloadTimer) {
+    console.log('Resetting forced reload');
+    clearInterval(activeReloadTimer);
+    activeReloadTimer = undefined;
+  }
+
+  var period = parseInt(config.forceReloadPeriod, 10);
+  var valid = config.Dashboard.isValid.call(undefined, getWebview(), config);
+  if (period && valid && !activeReloadTimer) {
+    console.log('Enabled forced reload', period);
+    activeReloadTimer = setInterval(function() {
+      console.log('Reached forced reload time', period);
+      getWebview().reload();
+    }, period * 1000);
+  } else if (!(period && valid) && activeReloadTimer) {
+    console.log('Disabled forced reload');
+    clearInterval(activeReloadTimer);
+    activeReloadTimer = undefined;
+  }
 }
 
 const minimumLoginDelay = 60 * 1000;  // milliseconds
