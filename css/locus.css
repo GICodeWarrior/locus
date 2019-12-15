@@ -28,17 +28,63 @@ div#overlay {
   right: 0;
   bottom: 0;
   left: 0;
+
+  animation: blur 5s;
+  animation-fill-mode: forwards;
 }
 
 div#overlay > ul {
   align-self: center;
   justify-self: center;
 
-  border: 2px solid #ffa94d;
-  border-radius: 20px;
-  background-color: #ffd8a8;
-  
-  font-size: 4em;
-  color: #d9480f;
-  padding: 1em;
+  border: 0.25vmin solid #2ca58d;
+  border-radius: 1vmin;
+  background-color: #fffdf7;
+
+  font-size: 4vmin;
+  color: #0a2342;
+  padding-inline-start: 4vmin;
+  padding: 2vmin 2vmin 2vmin 4vmin;
+}
+
+div#overlay.loading {
+  animation: 0;
+  backdrop-filter: blur(1vmin);
+}
+
+div#overlay.loading:empty::before {
+  display: block;
+  align-self: center;
+  justify-self: center;
+
+  border: 0.25vmin solid #2ca58d;
+  border-radius: 1vmin;
+  background-color: #fffdf7;
+
+  font-size: 4vmin;
+  color: #0a2342;
+  padding: 2vmin;
+
+  font-weight: bold;
+  content: 'Loading...';
+
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes blur {
+  from {
+    backdrop-filter: blur(1vmin);
+  }
+  to {
+    backdrop-filter: blur(0);
+  }
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0.25vmin #f46197;
+  }
+  to {
+    box-shadow: 0 0 1vmin #f46197;
+  }
 }

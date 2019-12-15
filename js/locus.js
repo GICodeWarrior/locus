@@ -70,7 +70,8 @@ function updateConfig(storage, callback) {
     } else if (!(items[items.dashboardType] && (typeof items[items.dashboardType] == "object"))) {
       validationFailures.push('Dashboard config missing or invalid');
     } else {
-      config = Object.create(items[items.dashboardType]);
+      config = Object.create(items);
+      Object.assign(config, items[items.dashboardType]);
       config.Dashboard = dashboardTypes[items.dashboardType];
       validationFailures = config.Dashboard.validateConfig.call(undefined, config);
     }
@@ -109,6 +110,13 @@ function validatePage() {
   if (!config.valid) {
     console.log('validate page - skipping due to invalid config');
     return;
+  }
+
+  var overlay = document.querySelector('div#overlay');
+  if (!(config.showLoginProcess || config.Dashboard.isValid.call(undefined, getWebview(), config))) {
+    overlay.classList.add('loading');
+  } else {
+    overlay.classList.value = '';
   }
 
   config.Dashboard.validatePage.call(undefined, getWebview(), config);

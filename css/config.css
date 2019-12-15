@@ -24,13 +24,14 @@ form {
   border: 2px solid #2ca58d;
   border-radius: 5px;
   background-color: #fffdf7;
-  padding: 1em;
+  padding: 1rem;
   color: #0a2342;
 }
 
 label, fieldset {
   display: block;
-  margin-bottom: 0.5em;
+  position: relative;
+  margin-bottom: 0.5rem;
 }
 
 label:last-child, fieldset:last-child {
@@ -41,6 +42,13 @@ input, select {
   display: block;
   width: 100%;
   outline-color: #f46197;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
 }
 
 div#export-status {

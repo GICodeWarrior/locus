@@ -82,5 +82,8 @@ var CloudWatchDashboard = {
         javascriptSet('password', config.password) +
         'document.querySelector("#signin_button").click();'
     });
+  },
+  isValid: function(webview, config) {
+    return webview.src == config.cloudwatchURL;
   }
 }

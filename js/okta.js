@@ -93,5 +93,8 @@ var OktaDashboard = {
       username: config.oktaUsername,
       password: config.oktaPassword
     }));
+  },
+  isValid: function(webview, config) {
+    return webview.src == config.appDestinationURL;
   }
 }

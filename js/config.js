@@ -33,7 +33,27 @@ onload = function() {
     });
     updateView(select.value);
 
-    document.querySelectorAll('input').forEach(function(input) {
+    document.querySelectorAll('form > label > input').forEach(function(input) {
+      if (items[input.name]) {
+        if (input.type == 'checkbox'){
+          input.checked = items[input.name]
+        } else {
+          input.value = items[input.name]
+        }
+        console.log('input - loaded from storage', input.name);
+      }
+      input.addEventListener('change', function() {
+        var setting = { [input.name]: input.value};
+        if (input.type == 'checkbox') {
+          setting[input.name] = input.checked;
+        }
+        chrome.storage.local.set(setting);
+        Object.assign(items, setting);
+        console.log('input - saved to storage', setting);
+      });
+    });
+
+    document.querySelectorAll('fieldset > label > input').forEach(function(input) {
       var type = input.closest('fieldset').id.replace(/-fields$/, '');
 
       if (items[type] && items[type][input.name]) {
