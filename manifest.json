@@ -1,7 +1,7 @@
 {
   "name": "Locus Dashboard",
-  "description": "Automatically login, display, and maintain dashboards.",
-  "version": "2.4",
+  "description": "Automatically login, display, and maintain dashboards. Source code: https://github.com/GICodeWarrior/locus",
+  "version": "2.5",
   "manifest_version": 2,
   "app": {
     "background": {
@@ -11,9 +11,9 @@
     }
   },
   "icons": {
-    "16": "icon/locus-16.png",
-    "128": "icon/locus-128.png",
-    "256": "icon/locus-256.png"
+    "16": "img/locus-16.png",
+    "128": "img/locus-128.png",
+    "256": "img/locus-256.png"
   },
   "permissions": [
     "power",
