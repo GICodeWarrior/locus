@@ -10,6 +10,8 @@ This method gives you more control over the version you are running in your comp
 
 1. Download the latest release as a Zip file.
 2. Upload to: https://chrome.google.com/webstore/developer/dashboard
+3. Use the images in the `image/` directory of this repository as needed to satisfy the submission requirements.
+4. Publish the application privately to your domain.
 
 Publishing a private application does not require any payment.
 

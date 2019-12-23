@@ -11,14 +11,37 @@ onload = function() {
     document.querySelectorAll('fieldset').forEach(function(fieldset) {
       fieldset.style.display = fieldset.id == type + '-fields' ? '' : 'none';
     })
-  }
+  };
+
+  var getDashboardType = function() {
+    return document.querySelector('select[name=dashboardType]').value || 'none';
+  };
+
+  var readInput = function(input) {
+    if (input.type == 'checkbox') {
+      return input.checked;
+    } else if (input.type == 'number') {
+      return input.valueAsNumber;
+    }
+    return input.value;
+  };
+
+  var buildSubFields = function(dashboardType) {
+    var selector = 'fieldset#' + dashboardType + '-fields > label > input';
+    var settings = {};
+
+    document.querySelectorAll(selector).forEach(function(input) {
+      var value = readInput(input);
+      if (value) {
+        settings[input.name] = value;
+      }
+    });
+
+    return settings;
+  };
 
   chrome.storage.local.get(null, function(items) {
     console.log('loading settings', items);
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-    });
 
     var select = document.querySelector('select');
     if (items[select.name]) {
@@ -26,10 +49,10 @@ onload = function() {
       console.log('select - loaded from storage', select.name);
     }
     select.addEventListener('change', function() {
-      items[select.name] = select.value;
-      chrome.storage.local.set(items);
+      var setting = { [select.name]: select.value };
+      chrome.storage.local.set(setting);
       updateView(select.value);
-      console.log('select - saved to storage', items);
+      console.log('select - saved to storage', setting);
     });
     updateView(select.value);
 
@@ -43,13 +66,15 @@ onload = function() {
         console.log('input - loaded from storage', input.name);
       }
       input.addEventListener('change', function() {
-        var setting = { [input.name]: input.value };
-        if (input.type == 'checkbox') {
-          setting[input.name] = input.checked;
+        var value = readInput(input);
+        if (value) {
+          var setting = { [input.name]: value };
+          chrome.storage.local.set(setting);
+          console.log('input - saved to storage', setting);
+        } else {
+          chrome.storage.local.remove(input.name);
+          console.log('input - removed from storage', input.name);
         }
-        chrome.storage.local.set(setting);
-        Object.assign(items, setting);
-        console.log('input - saved to storage', setting);
       });
     });
 
@@ -61,30 +86,31 @@ onload = function() {
         console.log('input - loaded from storage', input.name);
       }
       input.addEventListener('change', function() {
-        var typeSettings = items[type] || {};
-        typeSettings[input.name] = input.value;
-        items[type] = typeSettings;
-
-        var setting = { [type]: typeSettings };
+        var setting = { [type]: buildSubFields(type) };
         chrome.storage.local.set(setting);
         console.log('input - saved to storage', setting);
       });
     });
 
-    document.querySelector('button').addEventListener('click', function() {
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
       var status = document.querySelector('div#export-status');
       status.classList.value = '';
       void status.offsetWidth;  // trigger reflow to reset animation
 
-      var dashboardType = items['dashboardType'] || 'none';
+      var dashboardType = getDashboardType();
       var toExport = {
-        dashboardType: {
-          'Value': dashboardType,
-        },
-        [dashboardType]: {
-          'Value': items[dashboardType] || {}
-        }
+        dashboardType: dashboardType,
+        [dashboardType]: { 'Value': buildSubFields(dashboardType) }
       };
+
+      document.querySelectorAll('form > label > input').forEach(function(input) {
+        var value = readInput(input);
+        if (value) {
+          toExport[input.name] = { 'Value': value };
+        }
+      });
 
       navigator.clipboard.writeText(JSON.stringify(toExport, null, 2))
         .then(function() {

@@ -5,6 +5,14 @@
       "title": "Dashboard Type",
       "type": "string"
     },
+    "showLoginProcess": {
+      "title": "Show Login Process",
+      "type": "boolean"
+    },
+    "forceReloadPeriod": {
+      "title": "Force Reload Period",
+      "type": "integer"
+    },
     "okta": {
       "type": "object",
       "properties": {
