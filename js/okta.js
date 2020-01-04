@@ -13,6 +13,7 @@ const oktaAppPathPrefix = '/';
 const appDestinationURLPrefix = 'https://';
 
 const oktaLoginRegex = RegExp('^https://([\\w.\\-]+\\.)?okta(preview)?.com/login');
+const urlFragmentRegex = RegExp('#.*$');
 
 const getOktaAuthURL = function(config) {
   return 'https://' + config.oktaDomain + '/api/v1/authn';
@@ -58,7 +59,7 @@ var OktaDashboard = {
     return validationFailures;
   },
   validatePage: function(webview, config) {
-    if (webview.src != config.appDestinationURL) {
+    if (!OktaDashboard.isValid.call(undefined, webview, config)) {
       if (webview.src.match(oktaLoginRegex)) {
         console.log("validate page - identified Okta signin");
         loginWithRateLimit();
@@ -95,6 +96,14 @@ var OktaDashboard = {
     }));
   },
   isValid: function(webview, config) {
-    return webview.src == config.appDestinationURL;
+    var current = webview.src;
+    var desired = config.appDestinationURL;
+
+    if (!config.appEnforceFragment) {
+      current = current.replace(urlFragmentRegex, '');
+      desired = desired.replace(urlFragmentRegex, '');
+    }
+
+    return current == desired;
   }
 }
