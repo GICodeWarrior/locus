@@ -1,7 +1,7 @@
 {
   "name": "Locus Dashboard",
   "description": "Automatically login, display, and maintain dashboards. Source code: https://github.com/GICodeWarrior/locus",
-  "version": "2.6",
+  "version": "2.7",
   "manifest_version": 2,
   "app": {
     "background": {

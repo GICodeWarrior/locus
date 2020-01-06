@@ -39,6 +39,10 @@
         "appLoggedOutRegex": {
           "title": "Application Logged Out Regex",
           "type": "string"
+        },
+        "appEnforceFragment": {
+          "title": "Enforce URL Fragment",
+          "type": "string"
         }
       }
     },
