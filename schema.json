@@ -42,7 +42,7 @@
         },
         "appEnforceFragment": {
           "title": "Enforce URL Fragment",
-          "type": "string"
+          "type": "boolean"
         }
       }
     },

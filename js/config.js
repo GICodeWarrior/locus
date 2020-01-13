@@ -101,7 +101,7 @@ onload = function() {
 
       var dashboardType = getDashboardType();
       var toExport = {
-        dashboardType: dashboardType,
+        dashboardType: { 'Value': dashboardType },
         [dashboardType]: { 'Value': buildSubFields(dashboardType) }
       };
 
